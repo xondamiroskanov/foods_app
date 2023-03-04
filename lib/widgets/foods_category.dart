@@ -13,7 +13,7 @@ class FoodsCategory extends StatelessWidget {
     //     builder: (BuildContext context) => FoodCategoryPage(foodModel),
     //   ),
     // );
-    Navigator.pushNamed(context, "/foodCategoryPage",arguments: foodModel.foodTitle);
+    Navigator.pushNamed(context, "/foodCategoryPage",arguments: foodModel.foodTitle,);
   }
 
   @override
@@ -54,6 +54,5 @@ class FoodsCategory extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
