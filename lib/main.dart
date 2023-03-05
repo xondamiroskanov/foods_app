@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:foods_app/models/food_model.dart';
 import 'package:foods_app/pages/food_category_page.dart';
 import 'package:foods_app/pages/foods_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'models/enter_food_model.dart';
 
 void main() {
   runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  EnterFoodCategory enterFoodCategory = EnterFoodCategory();
+  FoodInformation foodInformation = FoodInformation();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green
       ),
       debugShowCheckedModeBanner: false,
-      home: FoodsPage(),
+      home: FoodsPage(enterFoodCategory.enterFoodModel,foodInformation.foodList),
       routes: {
         "/foodCategoryPage":(context)=>FoodCategoryPage()
       },

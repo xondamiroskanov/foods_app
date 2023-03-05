@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:foods_app/models/food_model.dart';
 
+import '../models/enter_food_model.dart';
+
 class FoodsCategory extends StatelessWidget {
   final FoodModel foodModel;
+  final List<EnterFoodModel> enterFoodModel;
+  FoodsCategory(this.foodModel,this.enterFoodModel);
 
-  FoodsCategory(this.foodModel);
-
-  void enterFoodCategory(BuildContext context,) {
+  void enterFoodCategory(
+    BuildContext context,
+  ) {
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(
     //     builder: (BuildContext context) => FoodCategoryPage(foodModel),
     //   ),
     // );
-    Navigator.pushNamed(context, "/foodCategoryPage",arguments: foodModel.foodTitle,);
+    Navigator.pushNamed(
+      context,
+      "/foodCategoryPage",
+      arguments: {
+        "foodTitle": foodModel.foodTitle,
+        "categoryImage": enterFoodModel,
+      },
+    );
   }
 
   @override
@@ -22,7 +33,9 @@ class FoodsCategory extends StatelessWidget {
       padding: EdgeInsets.all(6),
       child: InkWell(
         onTap: () {
-          enterFoodCategory(context,);
+          enterFoodCategory(
+            context,
+          );
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(14),
