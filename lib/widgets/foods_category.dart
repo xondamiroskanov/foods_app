@@ -11,12 +11,7 @@ class FoodsCategory extends StatelessWidget {
   void enterFoodCategory(
     BuildContext context,
   ) {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (BuildContext context) => FoodCategoryPage(foodModel),
-    //   ),
-    // );
+
     Navigator.pushNamed(
       context,
       "/foodCategoryPage",
