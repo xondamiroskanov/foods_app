@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foods_app/pages/enter_food_page.dart';
 
 class FoodCategoryPage extends StatelessWidget {
-
+final Function chooseFavorite;
+final Function isFavoriteId;
+FoodCategoryPage(this.chooseFavorite,this.isFavoriteId);
   @override
   Widget build(BuildContext context) {
     final categoryData =
@@ -18,7 +20,7 @@ class FoodCategoryPage extends StatelessWidget {
               itemCount: meals.length,
               padding: EdgeInsets.all(16),
               itemBuilder: (BuildContext context, int index) {
-                return EnterFoodPage(e: meals[index]);
+                return EnterFoodPage(e: meals[index],chooseFavorite: chooseFavorite,isFavoriteId: isFavoriteId);
               })
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,

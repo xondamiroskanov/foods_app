@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foods_app/models/enter_food_model.dart';
 
 class FoodMainPage extends StatefulWidget {
+
   @override
   State<FoodMainPage> createState() => _FoodMainPageState();
 }

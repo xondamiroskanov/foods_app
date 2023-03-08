@@ -7,7 +7,6 @@ class EnterFoodModel {
   final String preparingTitme;
   final List<String> ingeridients;
   final String categoryId;
-  bool isLike;
 
   EnterFoodModel(
       {required this.images,
@@ -18,7 +17,7 @@ class EnterFoodModel {
       required this.preparingTitme,
       required this.ingeridients,
       required this.categoryId,
-      this.isLike = false});
+      });
 }
 
 class EnterFoodCategory {
@@ -77,5 +76,18 @@ class EnterFoodCategory {
 
   List<EnterFoodModel> get enterFoodModel {
     return _enterfoodModel;
+  }
+  List<EnterFoodModel> _favorites = [];
+
+  List<EnterFoodModel> get favorites{
+    return _favorites;
+  }
+  void isFavorite(String foodIdFavorite){
+    final indexFavorite =  _favorites.indexWhere((element) => element.id == foodIdFavorite);
+    if(indexFavorite<0){
+      _favorites.add(enterFoodModel.firstWhere((element) => element.id == foodIdFavorite));
+    }else{
+      _favorites.removeWhere((element) => element.id == foodIdFavorite);
+    }
   }
 }

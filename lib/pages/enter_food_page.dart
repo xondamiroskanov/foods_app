@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foods_app/models/enter_food_model.dart';
 class EnterFoodPage extends StatelessWidget {
   final EnterFoodModel e;
-  const EnterFoodPage({Key? key, required this.e}) : super(key: key);
+  final Function chooseFavorite;
+  final Function isFavoriteId;
+  const EnterFoodPage({Key? key,required this.chooseFavorite, required this.e, required this.isFavoriteId}) : super(key: key);
 void foodMain(BuildContext context){
   Navigator.pushNamed(context,"/FoodMainCategory",arguments: e);
 
@@ -54,8 +56,10 @@ void foodMain(BuildContext context){
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {},
-                    icon:  Icon( e.isLike ?
+                    onPressed: () {
+                      chooseFavorite(e.id);
+                    },
+                    icon:  Icon( isFavoriteId(e.id) ?
                       Icons.favorite_outlined:Icons.favorite_outline,
                       size: 28,
                       color: Colors.black45,
