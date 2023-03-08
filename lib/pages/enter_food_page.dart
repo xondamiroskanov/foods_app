@@ -59,7 +59,7 @@ void foodMain(BuildContext context){
                     onPressed: () {
                       chooseFavorite(e.id);
                     },
-                    icon:  Icon( isFavoriteId(e.id) ?
+                    icon:  Icon(isFavoriteId(e.id) ?
                       Icons.favorite_outlined:Icons.favorite_outline,
                       size: 28,
                       color: Colors.black45,

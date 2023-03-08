@@ -84,6 +84,7 @@ class EnterFoodCategory {
   }
   void isFavorite(String foodIdFavorite){
     final indexFavorite =  _favorites.indexWhere((element) => element.id == foodIdFavorite);
+
     if(indexFavorite<0){
       _favorites.add(enterFoodModel.firstWhere((element) => element.id == foodIdFavorite));
     }else{

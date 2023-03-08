@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foods_app/pages/favorite_page.dart';
 import 'package:foods_app/pages/foods_page.dart';
+import 'package:foods_app/widgets/drawer_page.dart';
 
 import '../models/enter_food_model.dart';
 import '../models/food_model.dart';
@@ -11,7 +12,8 @@ class BottomNavWidget extends StatefulWidget {
   final Function chooseFavorite;
   final Function isFavoriteId;
 
-  BottomNavWidget(this.enterfoodM, this.foodM,this.chooseFavorite,this.isFavoriteId);
+  BottomNavWidget(
+      this.enterfoodM, this.foodM, this.chooseFavorite, this.isFavoriteId);
 
   @override
   State<BottomNavWidget> createState() => _BottomNavWidgetState();
@@ -26,7 +28,11 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
     super.initState();
     _pages = [
       FoodsPage(widget.enterfoodM.enterFoodModel, widget.foodM),
-      FavoritePage(favorites: widget.enterfoodM.favorites,chooseFavorite: widget.chooseFavorite, isFavoriteId: widget.isFavoriteId,),
+      FavoritePage(
+        favorites: widget.enterfoodM.favorites,
+        chooseFavorite: widget.chooseFavorite,
+        isFavoriteId: widget.isFavoriteId,
+      ),
     ];
   }
 
@@ -73,6 +79,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
           ),
         ],
       ),
+      drawer: DrawerPage()
     );
   }
 }
