@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foods_app/models/food_model.dart';
+import 'package:foods_app/pages/add_new_product.dart';
 import 'package:foods_app/pages/food_category_page.dart';
 import 'package:foods_app/pages/food_main.dart';
 import 'package:foods_app/pages/products.dart';
@@ -19,7 +20,6 @@ class App extends StatefulWidget {
 
 class _MyAppState extends State<App> {
   EnterFoodCategory enterFoodCategory = EnterFoodCategory();
-
   FoodInformation foodInformation = FoodInformation();
 
   void chooseFavorite(String id) {
@@ -49,7 +49,8 @@ class _MyAppState extends State<App> {
         "/foodCategoryPage": (context) =>
             FoodCategoryPage(chooseFavorite, isFavoriteId),
         "/FoodMainCategory": (context) => FoodMainPage(),
-        "/products" : (context) => ProductsPage()
+        "/products" : (context) => ProductsPage(productsList: enterFoodCategory.enterFoodModel),
+        "/addNewProduct":(context)=> AddNewProduct(foods: foodInformation.foodList)
       },
     );
   }

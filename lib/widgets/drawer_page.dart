@@ -21,10 +21,10 @@ class DrawerPage extends StatelessWidget {
             title: Text("MENU"),
           ),
           listTile('Asosiy sahifa', Icons.home, () {
-            Navigator.pushNamed(context, "/");
+            Navigator.pushReplacementNamed(context, "/");
           }),
           listTile('Mahsulotlar', Icons.category, () {
-            Navigator.pushNamed(context, "/products");
+            Navigator.pushReplacementNamed(context, "/products");
           })
 
         ],
