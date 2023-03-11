@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
 class NewFoodImage extends StatefulWidget {
-  final String imageUrl;
   final TextEditingController newFoodImageController;
   final String label;
 
   NewFoodImage(
       {Key? key,
-      required this.imageUrl,
       required this.newFoodImageController,
       required this.label})
       : super(key: key);
@@ -36,12 +34,13 @@ class _NewFoodImageState extends State<NewFoodImage> {
               border: Border.all(color: Colors.grey, width: 1),
             ),
             child: image != null && image.isNotEmpty
-                ? Image.network(image)
+                ? Image.network(image,fit: BoxFit.cover,)
                 : Center(
                     child: Text(
                       "Rasm kiriting",
                     ),
                   ),
+
           ),
           Expanded(
             child: TextField(

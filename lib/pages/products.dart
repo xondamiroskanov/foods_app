@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:foods_app/widgets/drawer_page.dart';
-
 import '../models/enter_food_model.dart';
 
-class ProductsPage extends StatelessWidget {
+class ProductsPage extends StatefulWidget {
   List<EnterFoodModel> productsList;
+  final Function deleteMeal;
 
-  ProductsPage({Key? key, required this.productsList}) : super(key: key);
+  ProductsPage({Key? key, required this.productsList, required this.deleteMeal})
+      : super(key: key);
+
+  @override
+  State<ProductsPage> createState() => _ProductsPageState();
+}
+
+class _ProductsPageState extends State<ProductsPage> {
+  void addNewProduct(BuildContext context) {
+    Navigator.pushNamed(context, "/addNewProduct").then((value) {
+      if (value == true) {
+        return setState(() {});
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +31,7 @@ class ProductsPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/addNewProduct");
+              addNewProduct(context);
             },
             icon: Icon(
               Icons.add,
@@ -26,14 +40,19 @@ class ProductsPage extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-          itemCount: productsList.length,
+          itemCount: widget.productsList.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              leading: Image.asset(productsList[index].images[0]),
-              title: Text(productsList[index].title),
-              subtitle: Text("${productsList[index].cost} so'm"),
+              leading:
+                  widget.productsList[index].images[0].startsWith("assets/")
+                      ? Image.asset(widget.productsList[index].images[0])
+                      : Image.network(widget.productsList[index].images[0]),
+              title: Text(widget.productsList[index].title),
+              subtitle: Text("${widget.productsList[index].cost} so'm"),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  widget.deleteMeal(widget.productsList[index].id);
+                },
                 icon: Icon(Icons.delete),
               ),
             );

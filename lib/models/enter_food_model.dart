@@ -91,4 +91,12 @@ class EnterFoodCategory {
       _favorites.removeWhere((element) => element.id == foodIdFavorite);
     }
   }
+  void newAddMeal(EnterFoodModel newMeals){
+     _enterfoodModel.add(newMeals);
+  }
+  void deleteMeal(String deleteId){
+    _enterfoodModel.removeWhere((element){
+      return element.id == deleteId;
+    });
+  }
 }

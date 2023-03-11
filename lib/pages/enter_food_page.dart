@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:foods_app/models/enter_food_model.dart';
+
 class EnterFoodPage extends StatelessWidget {
   final EnterFoodModel e;
   final Function chooseFavorite;
   final Function isFavoriteId;
-  const EnterFoodPage({Key? key,required this.chooseFavorite, required this.e, required this.isFavoriteId}) : super(key: key);
-void foodMain(BuildContext context){
-  Navigator.pushNamed(context,"/FoodMainCategory",arguments: e);
 
-}
+  const EnterFoodPage(
+      {Key? key,
+      required this.chooseFavorite,
+      required this.e,
+      required this.isFavoriteId})
+      : super(key: key);
+
+  void foodMain(BuildContext context) {
+    Navigator.pushNamed(context, "/FoodMainCategory", arguments: e);
+  }
+
   @override
   Widget build(BuildContext context) {
-    print("ishladi ${e.images[0]}");
     return InkWell(
-      onTap: (){
+      onTap: () {
         foodMain(context);
       },
       child: Card(
@@ -25,9 +32,14 @@ void foodMain(BuildContext context){
                 children: [
                   Container(
                     width: double.infinity,
-                    child: Image.asset(
-                    e.images[0],
-                    ),
+                    child: e.images[0].startsWith("assets/")
+                        ? Image.asset(
+                            e.images[0],
+                          )
+                        : Image.network(
+                            e.images[0],
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   Positioned(
                     bottom: 0,
@@ -35,16 +47,15 @@ void foodMain(BuildContext context){
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.black45.withOpacity(0.4),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(24))),
+                          borderRadius:
+                              BorderRadius.only(topLeft: Radius.circular(24))),
                       height: 40,
                       width: 200,
                       child: Padding(
                         padding: EdgeInsets.all(8),
                         child: Text(
                           e.title,
-                          style: TextStyle(
-                              fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20, color: Colors.white),
                           textAlign: TextAlign.end,
                         ),
                       ),
@@ -59,8 +70,10 @@ void foodMain(BuildContext context){
                     onPressed: () {
                       chooseFavorite(e.id);
                     },
-                    icon:  Icon(isFavoriteId(e.id) ?
-                      Icons.favorite_outlined:Icons.favorite_outline,
+                    icon: Icon(
+                      isFavoriteId(e.id)
+                          ? Icons.favorite_outlined
+                          : Icons.favorite_outline,
                       size: 28,
                       color: Colors.black45,
                     ),

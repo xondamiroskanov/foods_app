@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:foods_app/models/enter_food_model.dart';
 
 class FoodMainPage extends StatefulWidget {
-
   @override
   State<FoodMainPage> createState() => _FoodMainPageState();
 }
@@ -38,11 +37,17 @@ class _FoodMainPageState extends State<FoodMainPage> {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
-                      child: Image.asset(
-                        imageUrl,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                      ),
+                      child: imageUrl.startsWith("assets/")
+                          ? Image.asset(
+                              imageUrl,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            )
+                          : Image.network(
+                              imageUrl,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            ),
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.symmetric(horizontal: 5.0),
                       decoration: BoxDecoration(color: Colors.amber),

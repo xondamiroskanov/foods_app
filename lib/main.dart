@@ -26,11 +26,20 @@ class _MyAppState extends State<App> {
     setState(() {
       enterFoodCategory.isFavorite(id);
     });
-
   }
 
   bool isFavoriteId(String foodid) {
     return enterFoodCategory.favorites.any((element) => element.id == foodid);
+  }
+
+  void newMealFunction(EnterFoodModel newMeal) {
+    enterFoodCategory.newAddMeal(newMeal);
+  }
+
+  void _deleteMeal(String deleteId) {
+    setState(() {
+      enterFoodCategory.deleteMeal(deleteId);
+    });
   }
 
   @override
@@ -49,8 +58,14 @@ class _MyAppState extends State<App> {
         "/foodCategoryPage": (context) =>
             FoodCategoryPage(chooseFavorite, isFavoriteId),
         "/FoodMainCategory": (context) => FoodMainPage(),
-        "/products" : (context) => ProductsPage(productsList: enterFoodCategory.enterFoodModel),
-        "/addNewProduct":(context)=> AddNewProduct(foods: foodInformation.foodList)
+        "/products": (context) => ProductsPage(
+              productsList: enterFoodCategory.enterFoodModel,
+              deleteMeal: _deleteMeal,
+            ),
+        "/addNewProduct": (context) => AddNewProduct(
+              foods: foodInformation.foodList,
+              newMealFunction: newMealFunction,
+            )
       },
     );
   }

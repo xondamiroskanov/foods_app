@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:foods_app/widgets/new_food_image.dart';
 
+import '../models/enter_food_model.dart';
 import '../models/food_model.dart';
 
 class AddNewProduct extends StatefulWidget {
   List<FoodModel> foods;
+  final Function newMealFunction;
 
-  AddNewProduct({Key? key, required this.foods}) : super(key: key);
+  AddNewProduct({
+    Key? key,
+    required this.foods,
+    required this.newMealFunction,
+  }) : super(key: key);
 
   @override
   State<AddNewProduct> createState() => _AddNewProductState();
@@ -35,9 +41,27 @@ class _AddNewProductState extends State<AddNewProduct> {
         _thirtFoodImageController.text.isEmpty) {
       return;
     }
+    final List<String> imageUrls = [
+      _mainFoodImageController.text,
+      _firstFoodImageController.text,
+      _secondFoodImageController.text,
+      _thirtFoodImageController.text
+    ];
+    final List<String> ingreds = _foodIngredientController.text.split(',');
+    widget.newMealFunction(
+      EnterFoodModel(
+          images: imageUrls,
+          title: _foodNameController.text,
+          description: _foodDescriptionController.text,
+          cost: _foodCostController.text,
+          id: UniqueKey().toString(),
+          preparingTitme: _foodPreparedTimeController.text,
+          ingeridients: ingreds,
+          categoryId: productTitle),
+    );
+    Navigator.pop(context,true);
   }
 
-  List<String> imageUrls = [];
   late String productTitle;
 
   @override
@@ -52,7 +76,11 @@ class _AddNewProductState extends State<AddNewProduct> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                submit();
+              });
+            },
             icon: Icon(
               Icons.save,
             ),
@@ -112,19 +140,15 @@ class _AddNewProductState extends State<AddNewProduct> {
                 decoration: InputDecoration(hintText: "Tayyor bo'lish vaqti"),
               ),
               NewFoodImage(
-                  imageUrl: imageUrls.length > 0 ? imageUrls[0] : '',
                   newFoodImageController: _mainFoodImageController,
                   label: "Asosiy rasm linkini kiriting"),
               NewFoodImage(
-                  imageUrl: imageUrls.length > 1 ? imageUrls[1] : '',
                   newFoodImageController: _firstFoodImageController,
                   label: "Asosiy rasm linkini kiriting"),
               NewFoodImage(
-                  imageUrl: imageUrls.length > 2 ? imageUrls[2] : '',
                   newFoodImageController: _secondFoodImageController,
                   label: "Asosiy rasm linkini kiriting"),
               NewFoodImage(
-                  imageUrl: imageUrls.length > 3 ? imageUrls[3] : '',
                   newFoodImageController: _thirtFoodImageController,
                   label: "Asosiy rasm linkini kiriting")
             ],
